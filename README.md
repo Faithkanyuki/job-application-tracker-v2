@@ -4,7 +4,7 @@
 
 A secure job application tracker where users can save roles they're interested in, track progress on each one (Saved → Applied → Interview → Offer → Rejected), and keep private notes — built as a practical competency project.
 
-This is a from-scratch rebuild of an earlier version of this project, scaffolded directly with `create-next-app` on Next.js 16 and Tailwind CSS v4, rather than migrated forward from an older version.
+This is a from-scratch rebuild of an earlier version of this project, Built directly with `create-next-app` on Next.js 16 and Tailwind CSS v4, rather than migrated forward from an older version.
 
 ## Overview
 
