@@ -84,6 +84,20 @@ export default function SignUpPage() {
         >
           {loading ? "Creating account..." : "Sign up"}
         </button>
+        <button
+  type="button"
+  onClick={() => authClient.signIn.social({ provider: "google", callbackURL: "/dashboard" })}
+  className="w-full border border-gray-300 rounded-md py-2 font-medium hover:bg-gray-50 flex items-center justify-center gap-2"
+>
+  Continue with Google
+</button>
+<button
+  type="button"
+  onClick={() => authClient.signIn.social({ provider: "github", callbackURL: "/dashboard" })}
+  className="w-full border border-gray-300 rounded-md py-2 font-medium hover:bg-gray-50 flex items-center justify-center gap-2"
+>
+  Continue with GitHub
+</button>
       </form>
       <p className="text-sm text-gray-500 mt-4">
         Already have an account?{" "}

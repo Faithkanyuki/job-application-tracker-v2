@@ -70,6 +70,20 @@ export default function SignInPage() {
         >
           {loading ? "Signing in..." : "Sign in"}
         </button>
+        <button
+  type="button"
+  onClick={() => authClient.signIn.social({ provider: "google", callbackURL: "/dashboard" })}
+  className="w-full border border-gray-300 rounded-md py-2 font-medium hover:bg-gray-50 flex items-center justify-center gap-2"
+>
+  Continue with Google
+</button>
+<button
+  type="button"
+  onClick={() => authClient.signIn.social({ provider: "github", callbackURL: "/dashboard" })}
+  className="w-full border border-gray-300 rounded-md py-2 font-medium hover:bg-gray-50 flex items-center justify-center gap-2"
+>
+  Continue with GitHub
+</button>
       </form>
       <p className="text-sm text-gray-500 mt-4">
         Don&apos;t have an account?{" "}
