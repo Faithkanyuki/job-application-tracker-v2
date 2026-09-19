@@ -18,11 +18,19 @@ interface Application {
 }
 
 const statusStyles: Record<string, string> = {
-  SAVED: "bg-gray-100 text-gray-700",
-  APPLIED: "bg-blue-100 text-blue-700",
-  INTERVIEW: "bg-amber-100 text-amber-700",
-  OFFER: "bg-green-100 text-green-700",
-  REJECTED: "bg-red-100 text-red-700",
+  SAVED: "bg-hairline text-ink",
+  APPLIED: "bg-ink text-paper",
+  INTERVIEW: "bg-amber text-paper",
+  OFFER: "bg-sage text-paper",
+  REJECTED: "bg-stone text-paper",
+};
+
+const statusLabels: Record<string, string> = {
+  SAVED: "Saved",
+  APPLIED: "Applied",
+  INTERVIEW: "Interview",
+  OFFER: "Offer",
+  REJECTED: "Rejected",
 };
 
 export default function DashboardPage() {
@@ -63,36 +71,42 @@ export default function DashboardPage() {
   }
 
   if (loading) {
-    return <p className="text-center mt-10 text-gray-500">Loading your applications...</p>;
+    return (
+      <div className="max-w-3xl mx-auto px-6 py-10">
+        <p className="text-stone text-sm">Loading your applications...</p>
+      </div>
+    );
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-10">
+    <div className="max-w-3xl mx-auto px-6 py-10">
       <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-semibold">Your applications</h1>
+        <h1 className="font-serif text-3xl text-ink">Your applications</h1>
         <Link
           href="/dashboard/new"
-          className="bg-blue-600 text-white rounded-md px-4 py-2 text-sm font-medium hover:bg-blue-700"
+          className="bg-amber text-paper rounded-md px-4 py-2 text-sm font-medium hover:opacity-90"
         >
           Add a job
         </Link>
       </div>
 
-      {error && (
-        <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-md px-4 py-3 mb-6">
+      {error ? (
+        <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-md px-4 py-3 mb-6">
           {error}
         </p>
-      )}
+      ) : null}
 
       {jobs.length === 0 ? (
-        <div className="border border-gray-200 rounded-lg px-6 py-12 text-center">
-          <p className="text-lg font-medium mb-2">Nothing tracked yet</p>
-          <p className="text-sm text-gray-500 mb-5">
+        <div className="border border-hairline rounded-lg px-6 py-12 text-center bg-white">
+          <p className="font-serif text-xl text-ink mb-2">
+            Nothing tracked yet
+          </p>
+          <p className="text-sm text-stone mb-5">
             Add the first job you&apos;re interested in to start keeping track.
           </p>
           <Link
             href="/dashboard/new"
-            className="inline-block bg-blue-600 text-white rounded-md px-4 py-2 text-sm font-medium hover:bg-blue-700"
+            className="inline-block bg-amber text-paper rounded-md px-4 py-2 text-sm font-medium hover:opacity-90"
           >
             Add a job
           </Link>
@@ -105,21 +119,26 @@ export default function DashboardPage() {
               <li key={job.id}>
                 <Link
                   href={`/dashboard/${job.id}`}
-                  className="flex items-center justify-between border border-gray-200 rounded-lg px-5 py-4 hover:border-gray-400 transition"
+                  className="flex items-center justify-between border border-hairline rounded-lg px-5 py-4 hover:border-ink transition bg-white"
                 >
                   <div>
-                    <h2 className="font-medium">{job.title}</h2>
-                    <p className="text-sm text-gray-500">
+                    <h2 className="text-ink font-medium">{job.title}</h2>
+                    <p className="text-sm text-stone">
                       {job.company}
-                      {job.location ? ` — ${job.location}` : ""}
+                      {job.location ? " — " + job.location : ""}
                     </p>
                   </div>
                   {status ? (
-                    <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${statusStyles[status]}`}>
-                      {status}
+                    <span
+                      className={
+                        "text-xs px-2.5 py-1 rounded-full font-medium " +
+                        statusStyles[status]
+                      }
+                    >
+                      {statusLabels[status]}
                     </span>
                   ) : (
-                    <span className="text-xs px-2.5 py-1 rounded-full font-medium bg-gray-100 text-gray-500">
+                    <span className="text-xs px-2.5 py-1 rounded-full font-medium bg-hairline text-stone">
                       Not tracked
                     </span>
                   )}
